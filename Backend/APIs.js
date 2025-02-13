@@ -76,7 +76,7 @@ router.post("/signup", async (req, res) => {
 });
 
 // Login user API
-router.get("/login", async (req, res) => {
+router.post("/login", async (req, res) => {
   // Extracting data
   const { email, password } = req.body;
 
