@@ -1,10 +1,42 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/images/login.jpg";
+import { handleError } from "../../utils/ToastMsg";
+import axiosInstance from "../../utils/axiosInstance";
 
 const Login = () => {
-  const handleSubmit = () => {
-    // Handle form submission
+  
+  // To collect login info
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // For successful navigation
+  const navigate = useNavigate();
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Basic validation
+    if (!email || !password) {
+      handleError("Email and password is required !");
+      return;
+    }
+
+    // API call
+    try {
+      const response = await axiosInstance.post("/login", {
+        email: email,
+        password: password,
+      });
+
+      if (response.data && response.data.accessToken) {
+        localStorage.setItem("token", response.data.accessToken);
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      handleError(error.response.data?.message || "Something went wrong !");
+    }
   };
 
   return (
@@ -31,6 +63,10 @@ const Login = () => {
                   type="email"
                   className="w-full rounded-lg border-2 border-gray-200 p-4 pe-12 text-sm shadow-xs"
                   placeholder="Enter email"
+                  value={email}
+                  onChange={({ target }) => {
+                    setEmail(target.value);
+                  }}
                 />
               </div>
             </div>
@@ -41,6 +77,10 @@ const Login = () => {
                   type="password"
                   className="w-full rounded-lg border-2 border-gray-200 p-4 pe-12 text-sm shadow-xs"
                   placeholder="Enter password"
+                  value={password}
+                  onChange={({ target }) => {
+                    setPassword(target.value);
+                  }}
                 />
               </div>
             </div>

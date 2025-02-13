@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, Navigate, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const LandingLayout = () => {
   return (
@@ -56,6 +57,7 @@ const LandingLayout = () => {
           </div>
         </div>
       </footer>
+      <ToastContainer />
     </div>
   );
 };
