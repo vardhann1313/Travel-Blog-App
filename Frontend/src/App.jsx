@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Layout Page
 import LandingLayout from "./assets/Layout/LandingLayout";
+import LoggedInLayout from "./assets/Layout/LoggedInLayout";
 // Error page
 import Errorpage from "./assets/ErrorPage/Errorpage";
 
@@ -13,6 +14,8 @@ import SignUp from "./pages/Auth/SignUp";
 
 // LoggedIn pages ---------
 import Dashboard from "./pages/Dashboard/Dashboard"
+import AllBlogs from "./pages/UserPages/AllBlogs"
+import AddBlog from "./pages/UserPages/AddBlog"
 
 const App = () => {
   return (
@@ -28,7 +31,11 @@ const App = () => {
           </Route>
 
           {/* LoggedIn pages */}
-          <Route path="/dashboard" exact element={<Dashboard />} />
+          <Route path="/dashboard" exact element={<LoggedInLayout />}>
+            <Route path="" exact element={<Dashboard />} />
+            <Route path="allBlogs" exact element={<AllBlogs />} />
+            <Route path="addBlog" exact element={<AddBlog />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
