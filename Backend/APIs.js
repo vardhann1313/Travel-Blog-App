@@ -14,9 +14,6 @@ const upload = require("./multer");
 // DB Models --------------------
 const User = require("./models/user.model");
 const TravelStory = require("./models/travelStory.model");
-const { measureMemory } = require("vm");
-const { error } = require("console");
-const { title } = require("process");
 
 // APIs -------------------------
 // Signup user API
