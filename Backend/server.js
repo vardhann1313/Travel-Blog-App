@@ -2,6 +2,7 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+const path = require('path')
 
 // DB connection ----------------
 require("./database");
@@ -21,6 +22,9 @@ app.use(cors({ origin: "*" }));
 app.get("/", (req, res) => {
   return res.send("I am alive !");
 });
+
+// Serving images ---------------
+app.use("/imageUploads", express.static(path.join(__dirname, "imageUploads")))
 
 // Routing all APIs
 app.use('/api', allAPIRouter)

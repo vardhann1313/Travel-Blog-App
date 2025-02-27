@@ -10,8 +10,8 @@ const travelStorySchema = mongoose.Schema({
     required: true,
   },
   visitedLocation: {
-    type: [String],
-    default: [],
+    type: String,
+    required: true,
   },
   isFavourite: {
     type: Boolean,

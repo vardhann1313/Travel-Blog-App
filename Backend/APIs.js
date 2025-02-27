@@ -172,7 +172,7 @@ router.post("/addTravelStory", authenticateToken, async (req, res) => {
   }
 
   // Saving data in DB
-  const parsedVisitedDate = new Date(parseInt(visitedDate));
+  const parsedVisitedDate = new Date(visitedDate);
   try {
     const travelStory = new TravelStory({
       title,
@@ -257,7 +257,7 @@ router.post(
 // ImageDelete API
 router.delete("/imageDelete", authenticateToken, async (req, res) => {
   // Extracting data
-  const { imageUrl } = req.body;
+  const { imageUrl } = req.query;
 
   // Error handling for image delete
   if (!imageUrl) {
@@ -326,7 +326,7 @@ router.put("/editTravelStory/:id", authenticateToken, async (req, res) => {
     }
 
     // Parsing date
-    const parsedVisitedDate = new Date(parseInt(visitedDate));
+    const parsedVisitedDate = new Date(visitedDate);
 
     // Updating story
     travelStory.title = title;
