@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs")
 
 // API authenticator for restricted APIs
 const { authenticateToken } = require("./utilities");
@@ -371,7 +371,7 @@ router.delete("/deleteTravelStory/:id", authenticateToken, async (req, res) => {
 
     // Deleting image as well
     const filename = path.basename(travelStory.imageUrl);
-    const filepath = fs.join(__dirname, "imageUploads", filename);
+    const filepath = path.join(__dirname, "imageUploads", filename);
 
     if (fs.existsSync(filepath)) {
       // Deleting image
